@@ -16,7 +16,7 @@ import asyncio
 # ⚙️  CONFIGURATION — modifie ces valeurs
 # ─────────────────────────────────────────
 
-DISCORD_TOKEN  = "MTQ4MTA3NjAyMTA4MzExNTc0Mg.GWPaR4.Tx-_budmDxXSyfUO2WzBxW-cebYFzZ8SeahbnQ"          # Token du bot Discord
+DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")         # Token du bot Discord
 CHANNEL_ID = 1471110169231360184               # ID du salon #planning
 
 # Choix de la source de l'iCal :
