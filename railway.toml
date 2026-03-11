@@ -1,5 +1,6 @@
 [build]
 builder = "nixpacks"
+buildCommand = "pip install discord.py icalendar pytz"
 
 [deploy]
 startCommand = "python3 emploi_du_temps.py"
