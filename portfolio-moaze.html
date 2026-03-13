@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moaze Mahmoud — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;image-rendering:pixelated;}
+body{background:#000;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Press Start 2P',monospace;}
+#G{
+  width:900px;height:600px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#04080f 0%,#0a1220 35%,#0e1a30 65%,#121f38 100%);
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Crect x='2' y='6' width='3' height='2' fill='%23999'/%3E%3Crect x='4' y='4' width='4' height='2' fill='%23bbb'/%3E%3Crect x='4' y='8' width='4' height='2' fill='%23777'/%3E%3Crect x='7' y='4' width='7' height='2' fill='%23ddd'/%3E%3Crect x='7' y='6' width='5' height='2' fill='%23aaa'/%3E%3Crect x='11' y='8' width='2' height='2' fill='%23c8a060'/%3E%3Crect x='13' y='10' width='2' height='2' fill='%23b09050'/%3E%3Crect x='15' y='12' width='2' height='2' fill='%23987838'/%3E%3Crect x='17' y='14' width='2' height='2' fill='%23806030'/%3E%3Crect x='19' y='16' width='2' height='2' fill='%23684820'/%3E%3C/svg%3E") 3 3,crosshair;
+}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:1}}
+.moon{position:absolute;top:22px;right:60px;width:34px;height:34px;background:#ffe8b0;box-shadow:0 0 0 3px #ffd060,0 0 22px rgba(255,220,100,.35);z-index:2;}
+.tb{position:absolute;bottom:0;left:0;right:0;height:52px;display:flex;align-items:center;justify-content:center;gap:3px;background:rgba(0,0,0,.72);border-top:2px solid rgba(255,255,255,.1);z-index:200;}
+.sl{width:42px;height:42px;background:rgba(70,70,70,.75);border:2px solid #666;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.sl.on{border-color:#fff;box-shadow:inset 0 0 0 1px #fff;}
+.gnd{position:absolute;bottom:52px;left:0;right:0;display:flex;justify-content:center;z-index:3;}
+.gb{width:56px;height:56px;flex-shrink:0;background:#2a1608;border-top:5px solid #1f5a08;border-left:2px solid rgba(255,255,255,.1);border-right:2px solid rgba(0,0,0,.4);border-bottom:2px solid rgba(0,0,0,.45);}
+
+#hud{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.82);border:2px solid rgba(255,255,255,.2);
+  padding:11px 24px;font-size:10px;color:#FFE840;z-index:100;
+  white-space:nowrap;text-align:center;pointer-events:none;
+}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.1}}
+.blink{animation:bl 1s infinite;}
+
+.ph{display:none;position:absolute;inset:0;z-index:10;}
+.ph.on{display:block;}
+
+.lr{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:8px;}
+#r1{bottom:190px;}
+#r2{bottom:118px;}
+
+.lb{width:64px;height:64px;position:relative;flex-shrink:0;cursor:crosshair;transition:transform .16s,opacity .18s;}
+.lb-bg{position:absolute;inset:0;}
+.lb-face{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;text-shadow:2px 2px 0 rgba(0,0,0,.8);z-index:2;}
+.lb-ck{position:absolute;inset:0;z-index:8;pointer-events:none;}
+@keyframes shk{0%,100%{transform:translate(0,0)}33%{transform:translate(-2px,1px)}66%{transform:translate(2px,-1px)}}
+.lb.go{animation:shk .07s infinite;}
+
+.tG .lb-bg{background:#4a2a10;border-top:5px solid #1e5806;border-left:2px solid rgba(255,255,255,.12);border-right:2px solid rgba(0,0,0,.38);border-bottom:2px solid rgba(0,0,0,.44);}
+.tS .lb-bg{background:#525252;border-top:2px solid #747474;border-left:2px solid rgba(255,255,255,.1);border-right:2px solid rgba(0,0,0,.32);border-bottom:2px solid rgba(0,0,0,.4);background-image:repeating-linear-gradient(0deg,transparent,transparent 9px,rgba(0,0,0,.06) 10px),repeating-linear-gradient(90deg,transparent,transparent 9px,rgba(0,0,0,.06) 10px);}
+.tW .lb-bg{background:#705018;border:2px solid rgba(0,0,0,.32);border-top-color:rgba(255,255,255,.1);background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.1) 0,rgba(0,0,0,.1) 3px,transparent 3px,transparent 8px);}
+.tD .lb-bg{background:#523010;border:2px solid rgba(0,0,0,.38);border-top-color:rgba(255,255,255,.08);}
+.tN .lb-bg{background:#0c051c;border:2px solid #5a20a0;border-top-color:#7a40c0;background-image:radial-gradient(circle at 40% 35%,rgba(150,60,240,.18) 0%,transparent 55%);}
+
+.bigblk{
+  position:absolute;bottom:118px;left:50%;transform:translateX(-50%);
+  width:88%;max-width:640px;
+  border:3px solid #666;border-top-color:#909090;border-left-color:#808080;
+  border-bottom-color:#2a2a2a;border-right-color:#2a2a2a;
+  background:#363636;z-index:20;
+  animation:ris .35s ease-out;
+}
+@keyframes ris{from{transform:translateX(-50%) translateY(28px);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+.bh{display:flex;align-items:center;gap:14px;padding:16px 22px 14px;border-bottom:2px solid #1e1e1e;}
+.bt{font-size:14px;color:#FFE840;text-shadow:2px 2px 0 rgba(0,0,0,.6);letter-spacing:.04em;}
+.bb{padding:18px 22px 10px;font-size:10px;color:#e0e0e0;line-height:2.8;}
+.bb b{color:#FFE840;font-size:11px;}
+.bb p{margin-bottom:12px;}
+.ch{display:inline-block;padding:4px 12px;margin:3px 4px 3px 0;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);font-size:8px;color:#aaddff;letter-spacing:.04em;}
+.btn{
+  display:block;margin:12px 22px 18px;padding:14px 22px;
+  border:3px solid;font-family:'Press Start 2P',monospace;font-size:10px;
+  color:#fff;cursor:pointer;background:#177017;
+  border-color:#22aa22;border-bottom-color:#0a500a;border-right-color:#0a500a;
+  letter-spacing:.03em;transition:filter .1s;
+}
+.btn:hover{filter:brightness(1.2);}
+.btn-pur{background:#521088!important;border-color:#8030c0!important;border-bottom-color:#200040!important;border-right-color:#200040!important;}
+
+#ph-drag .ov{position:absolute;inset:0;background:rgba(2,0,8,.88);z-index:0;}
+.dhp{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.8);border:2px solid #8030c0;padding:12px 22px;width:320px;z-index:60;}
+.dhp-t{font-size:10px;color:#cc88ff;margin-bottom:8px;text-align:center;}
+.dhp-b{height:14px;background:#06001a;border:1px solid #4a0a90;}
+.dhp-f{height:100%;background:linear-gradient(90deg,#6020a0,#dd44ff);transition:width .22s;}
+.dw{position:absolute;bottom:160px;left:50%;transform:translateX(-50%);cursor:crosshair;z-index:40;animation:fly 2.8s ease-in-out infinite;filter:drop-shadow(0 0 8px rgba(180,60,255,.4));}
+@keyframes fly{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-20px)}}
+.dw:hover{filter:drop-shadow(0 0 16px rgba(220,100,255,.7));}
+.dhint{position:absolute;bottom:130px;left:50%;transform:translateX(-50%);font-size:10px;color:#cc88ff;text-align:center;white-space:nowrap;z-index:50;letter-spacing:.03em;}
+.dmg{position:absolute;pointer-events:none;z-index:150;font-size:18px;color:#ff3333;text-shadow:2px 2px 0 #000;font-family:'Press Start 2P',monospace;animation:du .75s ease-out forwards;}
+@keyframes du{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-60px);opacity:0}}
+
+#ph-col{background:linear-gradient(180deg,#04080f 0%,#060e1a 100%);}
+.cl-in{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:90%;max-width:560px;}
+.cl-h{font-size:20px;color:#44ffcc;margin-bottom:22px;line-height:1.6;animation:cgl 2s ease-in-out infinite alternate;}
+@keyframes cgl{from{text-shadow:0 0 8px #44ffcc22}to{text-shadow:0 0 28px #44ffccaa,0 0 55px #44ffcc33}}
+.cl-s{font-size:10px;color:#ccc;line-height:3.2;margin-bottom:20px;}
+.cl-s b{color:#FFE840;font-size:11px;}
+.cl-s span{color:#44ffcc;}
+.cl-l{display:inline-block;margin:6px;padding:12px 20px;border:2px solid rgba(68,255,204,.4);font-size:9px;color:#44ffcc;cursor:pointer;font-family:'Press Start 2P',monospace;transition:background .15s;letter-spacing:.04em;}
+.cl-l:hover{background:rgba(68,255,204,.12);border-color:#44ffcc;}
+
+.pt{position:absolute;pointer-events:none;z-index:180;}
+.ep{position:absolute;width:6px;height:6px;pointer-events:none;z-index:180;}
+</style>
+</head>
+<body>
+<div id="G">
+<div id="SB"></div>
+<div class="moon" id="moon"></div>
+<div id="hud"><span class="blink" id="htxt">⛏ CLIQUE sur une lettre pour tout casser !</span></div>
+<div class="gnd" id="gnd"></div>
+<div class="tb">
+  <div class="sl on">⛏</div><div class="sl">🗡</div><div class="sl">🏠</div>
+  <div class="sl" style="opacity:.3">📜</div><div class="sl" style="opacity:.3">🧱</div>
+  <div class="sl" style="background:rgba(100,0,150,.3);border-color:#6020a0">☠</div>
+</div>
+
+<div class="ph on" id="ph-name">
+  <div class="lr" id="r1"></div>
+  <div class="lr" id="r2"></div>
+</div>
+
+<div class="ph" id="ph-ab">
+  <div class="bigblk">
+    <div class="bh"><span style="font-size:22px">🪨</span><span class="bt">À PROPOS DE MOI</span></div>
+    <div class="bb">
+      <p>Je m'appelle <b>MOAZE MAHMOUD</b>.</p>
+      <p>Étudiant @ <b>ECE Paris</b> — Ingénierie numérique.</p>
+      <p>CEO @ <b>Rilow's Company</b> — Agence business dev.</p>
+      <p>Je construis des systèmes qui <b>fonctionnent vraiment</b> —<br>du code au business en passant par les marchés financiers.</p>
+      <p><span class="ch">React</span><span class="ch">Python</span><span class="ch">MQL5</span><span class="ch">Trading</span><span class="ch">Business</span><span class="ch">ECE Paris</span></p>
+    </div>
+    <button class="btn" onclick="goPh('proj')">▶ Voir mes projets →</button>
+  </div>
+</div>
+
+<div class="ph" id="ph-proj">
+  <div class="bigblk" style="background:#1a1a38;border-color:#4848a0;border-top-color:#7070c0;border-left-color:#5858b0;">
+    <div class="bh"><span style="font-size:22px">💎</span><span class="bt" style="color:#aaccff">MES PROJETS</span></div>
+    <div class="bb">
+      <p><b>MatchMate</b> — App matching gamers en &lt;2 min<br><span class="ch">React</span><span class="ch">Supabase</span><span class="ch">Node.js</span></p>
+      <p><b>Gold Bot</b> — IA Trading XAUUSD, cible 50€/jour<br><span class="ch">Python</span><span class="ch">MQL5</span><span class="ch">LSTM+XGBoost</span></p>
+      <p><b>Site CV</b> — Portfolio Pokémon, Vanilla JS only<br><span class="ch">HTML</span><span class="ch">CSS</span><span class="ch">JavaScript</span></p>
+      <p><b>Rilow's Company</b> — Agence biz dev, clients réels<br><span class="ch">Strategy</span><span class="ch">Contrats</span></p>
+    </div>
+    <button class="btn btn-pur" onclick="goDragon()">⚠ BOSS FINAL — Tue le dragon !</button>
+  </div>
+</div>
+
+<div class="ph" id="ph-drag">
+  <div class="ov"></div>
+  <div class="dhp">
+    <div class="dhp-t">☠ ENDER DRAGON</div>
+    <div class="dhp-b"><div class="dhp-f" id="dhpf" style="width:100%"></div></div>
+  </div>
+  <div class="dw" id="dw" onclick="hit(event)">
+    <svg width="300" height="190" viewBox="0 0 80 50">
+      <rect x="0"  y="18" width="3"  height="4" fill="#22004a"/>
+      <rect x="0"  y="15" width="5"  height="4" fill="#300065"/>
+      <rect x="1"  y="12" width="7"  height="4" fill="#3e0080"/>
+      <rect x="3"  y="9"  width="9"  height="4" fill="#4e009a"/>
+      <rect x="5"  y="6"  width="10" height="4" fill="#5e00b0"/>
+      <rect x="8"  y="3"  width="9"  height="4" fill="#7010c8"/>
+      <rect x="11" y="1"  width="7"  height="3" fill="#8820dc"/>
+      <rect x="13" y="0"  width="4"  height="2" fill="#9a30ee"/>
+      <rect x="77" y="18" width="3"  height="4" fill="#22004a"/>
+      <rect x="75" y="15" width="5"  height="4" fill="#300065"/>
+      <rect x="72" y="12" width="7"  height="4" fill="#3e0080"/>
+      <rect x="68" y="9"  width="9"  height="4" fill="#4e009a"/>
+      <rect x="65" y="6"  width="10" height="4" fill="#5e00b0"/>
+      <rect x="63" y="3"  width="9"  height="4" fill="#7010c8"/>
+      <rect x="60" y="1"  width="7"  height="3" fill="#8820dc"/>
+      <rect x="63" y="0"  width="4"  height="2" fill="#9a30ee"/>
+      <rect x="20" y="14" width="40" height="18" fill="#180038"/>
+      <rect x="22" y="12" width="36" height="4"  fill="#240050"/>
+      <rect x="26" y="16" width="4" height="12" fill="#240050" opacity=".6"/>
+      <rect x="34" y="16" width="4" height="12" fill="#240050" opacity=".6"/>
+      <rect x="42" y="16" width="4" height="12" fill="#240050" opacity=".6"/>
+      <rect x="50" y="16" width="4" height="12" fill="#240050" opacity=".6"/>
+      <rect x="54" y="14" width="10" height="9"  fill="#1e0042"/>
+      <rect x="63" y="11" width="15" height="12" fill="#280055"/>
+      <rect x="65" y="9"  width="13" height="3"  fill="#380070"/>
+      <rect x="73" y="13" width="3" height="3" fill="#ff2200"/>
+      <rect x="74" y="14" width="1" height="1" fill="#ffaa00"/>
+      <rect x="66" y="7"  width="2" height="3" fill="#7a30d0"/>
+      <rect x="71" y="6"  width="2" height="4" fill="#8840e0"/>
+      <rect x="10" y="18" width="12" height="8" fill="#1e0042"/>
+      <rect x="4"  y="20" width="8"  height="7" fill="#160032"/>
+      <rect x="0"  y="22" width="6"  height="6" fill="#0e0022"/>
+      <rect x="28" y="30" width="5" height="8" fill="#180038"/>
+      <rect x="26" y="37" width="8" height="2" fill="#100028"/>
+      <rect x="48" y="30" width="5" height="8" fill="#180038"/>
+      <rect x="46" y="37" width="8" height="2" fill="#100028"/>
+    </svg>
+  </div>
+  <div class="dhint blink">⚔ CLIQUE sur le dragon pour l'attaquer !</div>
+</div>
+
+<div class="ph" id="ph-col">
+  <div id="cst"></div>
+  <div class="cl-in">
+    <div class="cl-h">ON COLLABORE ?</div>
+    <div class="cl-s">
+      Dragon vaincu. Portfolio terminé.<br>
+      Tu sais que je <b>construis des trucs qui marchent.</b><br><br>
+      📧 <span>moaze@rilow.co</span><br>
+      🔗 <span>linkedin.com/in/moaze</span><br>
+      📍 Paris &nbsp;·&nbsp; <b>Alternance 2025–2026</b> &nbsp;·&nbsp; 3j/2j
+    </div>
+    <div>
+      <span class="cl-l">✉ Écrire</span>
+      <span class="cl-l">🔗 LinkedIn</span>
+      <span class="cl-l">💻 GitHub</span>
+      <span class="cl-l">🏢 Rilow's Co</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const G=document.getElementById('G');
+const sb=document.getElementById('SB');
+for(let i=0;i<60;i++){const s=document.createElement('div');const sz=Math.random()<.22?2:1;s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:#fff;left:${Math.random()*100}%;top:${Math.random()*70}%;animation:tw ${1.8+Math.random()*3.5}s ${Math.random()*5}s ease-in-out infinite;`;sb.appendChild(s);}
+const gnd=document.getElementById('gnd');
+for(let i=0;i<16;i++){const b=document.createElement('div');b.className='gb';gnd.appendChild(b);}
+
+const ROWS=[
+  {id:'r1',word:'MOAZE',  tx:['tG','tS','tW','tD','tG']},
+  {id:'r2',word:'MAHMOUD',tx:['tS','tD','tN','tS','tW','tD','tS']},
+];
+const CLR={tG:['#2a6008','#4a2a10'],tS:['#525252','#333'],tW:['#705018','#3a2808'],tD:['#523010','#302008'],tN:['#5a20a0','#0c051c','#8a40d0']};
+
+let allBlocks=[];
+ROWS.forEach(row=>{
+  const el=document.getElementById(row.id);
+  [...row.word].forEach((ch,i)=>{
+    const t=row.tx[i];
+    const d=document.createElement('div');
+    d.className=`lb ${t}`;
+    d.innerHTML=`<div class="lb-bg"></div><div class="lb-face">${ch}</div><div class="lb-ck" id="ck-${row.id}-${i}"></div>`;
+    d.addEventListener('click',()=>breakAll());
+    el.appendChild(d);
+    allBlocks.push({el:d,row:row.id,idx:i,type:t});
+  });
+});
+
+let breaking=false;
+function breakAll(){
+  if(breaking)return;
+  breaking=true;
+  document.getElementById('htxt').textContent='💥 Destruction en cours...';
+  document.getElementById('htxt').classList.remove('blink');
+  allBlocks.forEach((b,n)=>{
+    setTimeout(()=>{
+      b.el.classList.add('go');
+      let s=0;
+      const ck=document.getElementById(`ck-${b.row}-${b.idx}`);
+      const iv=setInterval(()=>{
+        s++;ck.innerHTML=crk(s);
+        if(s>=4){
+          clearInterval(iv);
+          setTimeout(()=>{
+            pts(b.el,CLR[b.type]||['#888']);
+            b.el.style.transition='transform .12s,opacity .14s';
+            b.el.style.transform='scale(0) rotate(10deg)';
+            b.el.style.opacity='0';
+            b.el.style.pointerEvents='none';
+            if(n===allBlocks.length-1) setTimeout(()=>goPh('ab'),300);
+          },60);
+        }
+      },45);
+    },n*80);
+  });
+}
+
+function crk(s){
+  const d=[[],[[28,4,34,28,.4,2]],[[28,4,34,28,.44,2],[10,34,50,42,.4,2]],[[28,4,34,28,.5,2],[10,34,50,42,.45,2],[4,14,22,56,.5,2.5],[38,8,58,52,.46,2]],[[28,4,34,28,.56,2],[10,34,50,42,.5,2],[4,14,22,56,.56,2.5],[38,8,58,52,.52,2],[2,44,56,60,.48,2]]];
+  const ls=d[Math.min(s,4)];
+  return`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">${ls.map(([x1,y1,x2,y2,o,w])=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="rgba(0,0,0,${o})" stroke-width="${w}"/>`).join('')}</svg>`;
+}
+
+function goPh(name){
+  document.querySelectorAll('.ph').forEach(p=>p.classList.remove('on'));
+  document.getElementById('ph-'+name).classList.add('on');
+  const M={ab:'📖 À propos — Lis, puis continue !',proj:'💎 Mes projets — Ce que j\'ai construit',drag:'⚔ BOSS FINAL — Tue le dragon !',col:'🎉 Portfolio terminé — ON COLLABORE ?'};
+  const ht=document.getElementById('htxt');
+  ht.textContent=M[name]||'';
+  ht.classList.toggle('blink',name==='drag');
+}
+
+function goDragon(){
+  goPh('drag');
+  G.style.transition='background 1.2s';
+  G.style.background='linear-gradient(180deg,#020005 0%,#08001a 40%,#050010 100%)';
+  document.getElementById('moon').style.transition='opacity 1s';
+  document.getElementById('moon').style.opacity='0';
+}
+
+let hp=100;
+function hit(){
+  if(hp<=0)return;
+  const dmg=Math.floor(Math.random()*22)+7;
+  hp=Math.max(0,hp-dmg);
+  document.getElementById('dhpf').style.width=hp+'%';
+  const d=document.createElement('div');d.className='dmg';d.textContent='-'+dmg;
+  const r=document.getElementById('dw').getBoundingClientRect();
+  const gr=G.getBoundingClientRect();
+  d.style.cssText=`left:${r.left-gr.left+r.width/2+(Math.random()*44-22)}px;top:${r.top-gr.top+(Math.random()*22)}px;position:absolute;`;
+  G.appendChild(d);setTimeout(()=>d.remove(),780);
+  document.getElementById('dw').style.filter='brightness(3) drop-shadow(0 0 18px #ff88ff)';
+  setTimeout(()=>document.getElementById('dw').style.filter='drop-shadow(0 0 8px rgba(180,60,255,.4))',140);
+  ept(r,gr);
+  if(hp<=0)setTimeout(killDragon,100);
+}
+
+function ept(r,gr){
+  for(let i=0;i<8;i++){
+    const p=document.createElement('div');p.className='ep';
+    const cx=r.left-gr.left+r.width/2,cy=r.top-gr.top+r.height/2;
+    p.style.cssText=`background:#bb44ff;left:${cx}px;top:${cy}px;position:absolute;`;
+    G.appendChild(p);
+    const vx=(Math.random()-.5)*130,vy=(Math.random()-.5)*100;
+    let t=0;const a=setInterval(()=>{t+=16;p.style.left=(cx+vx*(t/300))+'px';p.style.top=(cy+vy*(t/300))+'px';p.style.opacity=1-t/600;if(t>600){clearInterval(a);p.remove();}},16);
+  }
+}
+
+function killDragon(){
+  const dw=document.getElementById('dw');
+  dw.style.transition='transform .6s,opacity .6s';
+  dw.style.transform='translateX(-50%) scale(3) rotate(20deg)';
+  dw.style.opacity='0';
+  const r=dw.getBoundingClientRect(),gr=G.getBoundingClientRect();
+  for(let i=0;i<28;i++)setTimeout(()=>ept(r,gr),i*35);
+  setTimeout(()=>{
+    goPh('col');
+    G.style.background='linear-gradient(180deg,#04080f 0%,#060d1c 100%)';
+    const cs=document.getElementById('cst');
+    for(let i=0;i<70;i++){const s=document.createElement('div');s.style.cssText=`position:absolute;width:${Math.random()<.2?2:1}px;height:${Math.random()<.2?2:1}px;background:#fff;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:tw ${1.5+Math.random()*3}s ${Math.random()*4}s ease-in-out infinite;`;cs.appendChild(s);}
+    for(let f=0;f<5;f++)setTimeout(()=>firework(),f*300+200);
+  },850);
+}
+
+function firework(){
+  const cx=20+Math.random()*60,cy=10+Math.random()*50;
+  const cols=['#44ffcc','#FFE840','#ff4488','#88aaff','#ff8844'];
+  for(let i=0;i<16;i++){
+    const p=document.createElement('div');p.className='ep';
+    p.style.cssText=`background:${cols[Math.floor(Math.random()*cols.length)]};left:${cx}%;top:${cy}%;position:absolute;`;
+    G.appendChild(p);
+    const a=i*(Math.PI*2/16),sp=60+Math.random()*80;
+    const vx=Math.cos(a)*sp,vy=Math.sin(a)*sp;
+    let t=0;const iv=setInterval(()=>{t+=16;p.style.left=`calc(${cx}% + ${vx*(t/400)}px)`;p.style.top=`calc(${cy}% + ${vy*(t/400)}px)`;p.style.opacity=1-t/700;if(t>700){clearInterval(iv);p.remove();}},16);
+  }
+}
+
+function pts(div,colors){
+  const r=div.getBoundingClientRect(),gr=G.getBoundingClientRect();
+  const cx=r.left-gr.left+r.width/2,cy=r.top-gr.top+r.height/2;
+  for(let i=0;i<10;i++){
+    const p=document.createElement('div');p.className='pt';
+    p.style.cssText=`width:5px;height:5px;background:${colors[i%colors.length]};left:${cx}px;top:${cy}px;position:absolute;`;
+    G.appendChild(p);
+    const vx=(Math.random()-.5)*100,vy=-(Math.random()*88+12);
+    let t=0;const a=setInterval(()=>{t+=16;p.style.left=(cx+vx*(t/260))+'px';p.style.top=(cy+vy*(t/260)+52*Math.pow(t/260,2))+'px';p.style.opacity=1-t/520;if(t>520){clearInterval(a);p.remove();}},16);
+  }
+}
+</script>
+</body>
+</html>
